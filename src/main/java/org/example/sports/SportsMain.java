@@ -41,6 +41,7 @@ public class SportsMain {
                 EntityTransaction transaction = entityManager.getTransaction();
                 switch (userChoice) {
                     case 1:
+                        //add a new athlete and get a statistic for them
                         Statistic statistic = addAthleteWithStatistic(userInputService);
                         transaction.begin();
                         entityManager.persist(statistic);
@@ -48,6 +49,7 @@ public class SportsMain {
                         userChoice = getUserChoice(userInputService);
                         break;
                     case 2:
+                        //add a statistic to a pre-existing athlete
                         transaction.begin();
                         Statistic statistic1 = getDistinctPlayerForNewStatistic(userInputService, entityManager);
                         Statistic anotherStatistic = addStatisticToPlayer(statistic1, entityManager, userInputService);
@@ -57,8 +59,10 @@ public class SportsMain {
                         break;
                     case 3:
                         int userStatisticChoice = getUserStatisticChoice(userInputService);
+                        //see either an average or max points
                         switch (userStatisticChoice) {
                             case 1:
+                                //gets an athlete and prints their average points
                                 Statistic statisticToGetAVG = getDistinctPlayerForNewStatistic(userInputService, entityManager);
                                 String query = "SELECT S from Statistic S where S.name = '" + statisticToGetAVG.getName() + "'";
                                 List<Statistic> statisticsToAverage = entityManager.createQuery(query,
@@ -75,6 +79,7 @@ public class SportsMain {
                                 System.out.println("Average score= " + average);
                                 break;
                             case 2:
+                                //gets an athlete and prints their max points
                                 Statistic statisticToGetMax = getDistinctPlayerForNewStatistic(userInputService, entityManager);
                                 String queryMax = "SELECT S from Statistic S where S.name = '" + statisticToGetMax.getName() + "'";
                                 List<Statistic> statisticsToMax = entityManager.createQuery(queryMax,
@@ -106,6 +111,7 @@ public class SportsMain {
     }
 
 
+    //ask user which statistic they would like to see
     private static int getUserStatisticChoice(UserInputService userInputService) {
         return Integer.parseInt(userInputService.getUserInput("What statistic would you like to see?\n" +
                         "1. Print their average points per game\n" +
@@ -113,6 +119,7 @@ public class SportsMain {
                 new NonBlankInputValidationRule()));
     }
 
+    //ask user what action they would like to perform
     private static int getUserChoice(UserInputService userInputService) {
         return Integer.parseInt(userInputService.getUserInput("What would you like to do?\n" +
                         "1. Add an athlete with a game statistic\n" +
@@ -123,6 +130,7 @@ public class SportsMain {
 
     }
 
+    //add an athlete with a statistic
     public static Statistic addAthleteWithStatistic(UserInputService userInputService) {
         Statistic statistic = new Statistic();
         String response = userInputService.getUserInput("What's the athletes name?",
@@ -134,7 +142,9 @@ public class SportsMain {
         return statistic;
     }
 
-
+    //get list of all distinct athletes
+    //print list
+    //ask user which one he wants to do stuff with
     public static Statistic getDistinctPlayerForNewStatistic(UserInputService userInputService, EntityManager entityManager) {
         String hql = "SELECT S from Statistic S";
 
@@ -163,6 +173,7 @@ public class SportsMain {
     }
 
 
+    //add statistic to existing player
     public static Statistic addStatisticToPlayer(Statistic statistic, EntityManager entityManager, UserInputService userInputService) {
 
         int score = Integer.parseInt(userInputService.getUserInput("What's the athletes score in this game?",
