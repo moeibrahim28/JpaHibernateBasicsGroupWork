@@ -3,6 +3,7 @@ package org.example.snippets.db;
 import org.example.shared.io.db.Repository;
 import org.example.snippets.model.Snippet;
 
+import javax.persistence.EntityManager;
 import java.util.Optional;
 
 public class SnippetsRepository implements Repository<Snippet> {
@@ -15,4 +16,5 @@ public class SnippetsRepository implements Repository<Snippet> {
     public Optional<Snippet> findById(Long id) {
         return Optional.empty();
     }
+
 }

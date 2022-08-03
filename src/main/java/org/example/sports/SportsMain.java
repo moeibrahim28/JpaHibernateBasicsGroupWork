@@ -2,6 +2,7 @@ package org.example.sports;
 
 import org.example.shared.io.UserOutputService;
 import org.example.shared.io.console.ConsoleUserOutputServiceImpl;
+import org.example.sports.model.Athlete;
 import org.example.sports.model.Statistic;
 import org.example.sports.service.ScannerUserStatisticService;
 import org.example.sports.service.StatisticsService;
@@ -31,7 +32,13 @@ public class SportsMain {
                 switch (userChoice) {
                     case 1:
                         //add a new athlete and get a statistic for them
+                        Athlete athlete= new Athlete();
                         Statistic statistic = statisticsService.addAthleteWithStatistic();
+                        athlete.setName(statistic.getName());
+                        statistic.setPlayerid(athlete.getId());
+                        transaction.begin();
+                        entityManager.persist(athlete);
+                        transaction.commit();
                         transaction.begin();
                         entityManager.persist(statistic);
                         transaction.commit();
@@ -39,9 +46,10 @@ public class SportsMain {
                         break;
                     case 2:
                         //add a statistic to a pre-existing athlete
-                        transaction.begin();
                         Statistic statistic1 = statisticsService.getDistinctPlayerForNewStatistic();
                         Statistic anotherStatistic = statisticsService.addStatisticToPlayer(statistic1);
+                        anotherStatistic.setPlayerid(statistic1.getPlayerid());
+                        transaction.begin();
                         entityManager.persist(anotherStatistic);
                         transaction.commit();
                         userChoice = statisticsService.getUserChoice();

@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a08601dd-2305-4399-a27d-96bb8e6d2003" name="Changes" comment="comments added in main">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/model/Athlete.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/service/ScannerUserStatisticService.java" afterDir="false" />
+    <list default="true" id="a08601dd-2305-4399-a27d-96bb8e6d2003" name="Changes" comment="still need to implement repository interface; static methods moved to scanneruserinputservice class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bank/db/BankAccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bank/db/BankAccountRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jaystuff/db/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jaystuff/db/StudentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/restaurants/db/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/restaurants/db/RestaurantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/shared/io/db/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/shared/io/db/Repository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/snippets/db/SnippetsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/snippets/db/SnippetsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/db/StatisticRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/db/StatisticRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/model/Statistic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/model/Statistic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/service/StatisticsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/service/StatisticsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659553758326</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="still need to implement repository interface; static methods moved to scanneruserinputservice class">
+      <created>1659556594551</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1659556594551</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,16 +164,16 @@
     <MESSAGE value="functionality works; need to add ability for user to choose sport and other statistics;" />
     <MESSAGE value="fixed print statements for some input" />
     <MESSAGE value="comments added in main" />
-    <option name="LAST_COMMIT_MESSAGE" value="comments added in main" />
+    <MESSAGE value="still need to implement repository interface; static methods moved to scanneruserinputservice class" />
+    <option name="LAST_COMMIT_MESSAGE" value="still need to implement repository interface; static methods moved to scanneruserinputservice class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/sports/model/Statistic.java</url>
-          <line>22</line>
-          <properties field="counter" class="org.example.sports.model.Statistic" />
-          <option name="timeStamp" value="15" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

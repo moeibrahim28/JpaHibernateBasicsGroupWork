@@ -3,6 +3,7 @@ package org.example.bank.db;
 import org.example.bank.model.BankAccount;
 import org.example.shared.io.db.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.Optional;
 
 public class BankAccountRepository implements Repository<BankAccount> {
@@ -15,4 +16,5 @@ public class BankAccountRepository implements Repository<BankAccount> {
     public Optional<BankAccount> findById(Long id) {
         return Optional.empty();
     }
+
 }
