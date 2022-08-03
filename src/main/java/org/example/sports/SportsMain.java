@@ -1,39 +1,28 @@
 package org.example.sports;
 
-import org.example.shared.io.UserInputService;
 import org.example.shared.io.UserOutputService;
-import org.example.shared.io.console.ConsoleUserInputServiceImpl;
 import org.example.shared.io.console.ConsoleUserOutputServiceImpl;
-import org.example.shared.io.validation.NonBlankInputValidationRule;
 import org.example.sports.model.Statistic;
+import org.example.sports.service.ScannerUserStatisticService;
+import org.example.sports.service.StatisticsService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SportsMain {
     public static void main(String[] args) throws Exception {
-        // create a new student instance
-//        Statistic statistic = new Statistic();
-//        statistic.setId(1);
-//        statistic.setName("Jack");
-        //create UserInputService and UserOutputService object
-
         UserOutputService userOutputService = new ConsoleUserOutputServiceImpl();
-        try (UserInputService userInputService = new ConsoleUserInputServiceImpl(userOutputService)) {
+        StatisticsService statisticsService = new ScannerUserStatisticService();
+        try {
             userOutputService.print("WELCOME");
 
-
-            // create EntityManager
-
-
-            // create and use transactions
-            int userChoice = getUserChoice(userInputService);
+            int userChoice = statisticsService.getUserChoice();
             boolean runValue = true;
             while (runValue) {
+                //create entity manager
                 EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("example");
                 EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -42,28 +31,28 @@ public class SportsMain {
                 switch (userChoice) {
                     case 1:
                         //add a new athlete and get a statistic for them
-                        Statistic statistic = addAthleteWithStatistic(userInputService);
+                        Statistic statistic = statisticsService.addAthleteWithStatistic();
                         transaction.begin();
                         entityManager.persist(statistic);
                         transaction.commit();
-                        userChoice = getUserChoice(userInputService);
+                        userChoice = statisticsService.getUserChoice();
                         break;
                     case 2:
                         //add a statistic to a pre-existing athlete
                         transaction.begin();
-                        Statistic statistic1 = getDistinctPlayerForNewStatistic(userInputService, entityManager);
-                        Statistic anotherStatistic = addStatisticToPlayer(statistic1, entityManager, userInputService);
+                        Statistic statistic1 = statisticsService.getDistinctPlayerForNewStatistic();
+                        Statistic anotherStatistic = statisticsService.addStatisticToPlayer(statistic1);
                         entityManager.persist(anotherStatistic);
                         transaction.commit();
-                        userChoice = getUserChoice(userInputService);
+                        userChoice = statisticsService.getUserChoice();
                         break;
                     case 3:
-                        int userStatisticChoice = getUserStatisticChoice(userInputService);
+                        int userStatisticChoice = statisticsService.getUserStatisticChoice();
                         //see either an average or max points
                         switch (userStatisticChoice) {
                             case 1:
                                 //gets an athlete and prints their average points
-                                Statistic statisticToGetAVG = getDistinctPlayerForNewStatistic(userInputService, entityManager);
+                                Statistic statisticToGetAVG = statisticsService.getDistinctPlayerForNewStatistic();
                                 String query = "SELECT S from Statistic S where S.name = '" + statisticToGetAVG.getName() + "'";
                                 List<Statistic> statisticsToAverage = entityManager.createQuery(query,
                                         Statistic.class).getResultList();
@@ -80,7 +69,7 @@ public class SportsMain {
                                 break;
                             case 2:
                                 //gets an athlete and prints their max points
-                                Statistic statisticToGetMax = getDistinctPlayerForNewStatistic(userInputService, entityManager);
+                                Statistic statisticToGetMax = statisticsService.getDistinctPlayerForNewStatistic();
                                 String queryMax = "SELECT S from Statistic S where S.name = '" + statisticToGetMax.getName() + "'";
                                 List<Statistic> statisticsToMax = entityManager.createQuery(queryMax,
                                         Statistic.class).getResultList();
@@ -95,7 +84,7 @@ public class SportsMain {
                             default:
                                 break;
                         }
-                        userChoice = getUserChoice(userInputService);
+                        userChoice = statisticsService.getUserChoice();
                         break;
                     case 4:
                         runValue = false;
@@ -107,81 +96,10 @@ public class SportsMain {
 
             }
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-    }
-
-
-    //ask user which statistic they would like to see
-    private static int getUserStatisticChoice(UserInputService userInputService) {
-        return Integer.parseInt(userInputService.getUserInput("What statistic would you like to see?\n" +
-                        "1. Print their average points per game\n" +
-                        "2. Max number of points in a game",
-                new NonBlankInputValidationRule()));
-    }
-
-    //ask user what action they would like to perform
-    private static int getUserChoice(UserInputService userInputService) {
-        return Integer.parseInt(userInputService.getUserInput("What would you like to do?\n" +
-                        "1. Add an athlete with a game statistic\n" +
-                        "2. Add another game statistic for the same athlete\n" +
-                        "3. Get statistics information on that athlete\n" +
-                        "4. Exit program.",
-                new NonBlankInputValidationRule()));
-
-    }
-
-    //add an athlete with a statistic
-    public static Statistic addAthleteWithStatistic(UserInputService userInputService) {
-        Statistic statistic = new Statistic();
-        String response = userInputService.getUserInput("What's the athletes name?",
-                new NonBlankInputValidationRule());
-        int score = Integer.parseInt(userInputService.getUserInput("What's the athletes score in this game?",
-                new NonBlankInputValidationRule()));
-        statistic.setName(response);
-        statistic.setScoreInGame(score);
-        return statistic;
-    }
-
-    //get list of all distinct athletes
-    //print list
-    //ask user which one he wants to do stuff with
-    public static Statistic getDistinctPlayerForNewStatistic(UserInputService userInputService, EntityManager entityManager) {
-        String hql = "SELECT S from Statistic S";
-
-        List<Statistic> statisticNamesList = entityManager.createQuery(hql,
-                Statistic.class).getResultList();
-        List<String> playerNames = new ArrayList<>();
-        for (int i = 0; i < statisticNamesList.size(); i++) {
-            if (!playerNames.contains(statisticNamesList.get(i).getName())) {
-                playerNames.add(statisticNamesList.get(i).getName());
-            }
-        }
-        String playerNamesString = "";
-        int count = 0;
-        for (String playerName : playerNames) {
-            playerNamesString += "\n" + count + ". " + playerName;
-            count++;
-
-        }
-        int chosenPlayer = Integer.parseInt(userInputService.getUserInput("Which athlete do you want to choose?" + playerNamesString,
-                new NonBlankInputValidationRule()));
-        Statistic statistic = new Statistic();
-        statistic.setName(statisticNamesList.get(chosenPlayer).getName());
-
-
-        return statistic;
-    }
-
-
-    //add statistic to existing player
-    public static Statistic addStatisticToPlayer(Statistic statistic, EntityManager entityManager, UserInputService userInputService) {
-
-        int score = Integer.parseInt(userInputService.getUserInput("What's the athletes score in this game?",
-                new NonBlankInputValidationRule()));
-        statistic.setScoreInGame(score);
-        return statistic;
     }
 }
-
 
 
