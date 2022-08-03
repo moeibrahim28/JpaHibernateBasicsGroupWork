@@ -61,7 +61,7 @@ public class SportsMain {
                             case 1:
                                 //gets an athlete and prints their average points
                                 Statistic statisticToGetAVG = statisticsService.getDistinctPlayerForNewStatistic();
-                                String query = "SELECT S from Statistic S where S.name = '" + statisticToGetAVG.getName() + "'";
+                                String query = "SELECT S from Statistic S where S.playerid = '" + statisticToGetAVG.getPlayerid() + "'";
                                 List<Statistic> statisticsToAverage = entityManager.createQuery(query,
                                         Statistic.class).getResultList();
 
@@ -78,7 +78,7 @@ public class SportsMain {
                             case 2:
                                 //gets an athlete and prints their max points
                                 Statistic statisticToGetMax = statisticsService.getDistinctPlayerForNewStatistic();
-                                String queryMax = "SELECT S from Statistic S where S.name = '" + statisticToGetMax.getName() + "'";
+                                String queryMax = "SELECT S from Statistic S where S.playerid = '" + statisticToGetMax.getPlayerid() + "'";
                                 List<Statistic> statisticsToMax = entityManager.createQuery(queryMax,
                                         Statistic.class).getResultList();
                                 int max = 0;

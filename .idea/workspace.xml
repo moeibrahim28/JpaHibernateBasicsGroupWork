@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a08601dd-2305-4399-a27d-96bb8e6d2003" name="Changes" comment="still need to implement repository interface; static methods moved to scanneruserinputservice class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bank/db/BankAccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bank/db/BankAccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jaystuff/db/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jaystuff/db/StudentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/restaurants/db/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/restaurants/db/RestaurantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/snippets/db/SnippetsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/snippets/db/SnippetsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java" afterDir="false" />
-    </list>
+    <list default="true" id="a08601dd-2305-4399-a27d-96bb8e6d2003" name="Changes" comment="implemented athlete table and class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659556594551</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="implemented athlete table and class">
+      <created>1659557606841</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659557606841</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,7 +165,8 @@
     <MESSAGE value="fixed print statements for some input" />
     <MESSAGE value="comments added in main" />
     <MESSAGE value="still need to implement repository interface; static methods moved to scanneruserinputservice class" />
-    <option name="LAST_COMMIT_MESSAGE" value="still need to implement repository interface; static methods moved to scanneruserinputservice class" />
+    <MESSAGE value="implemented athlete table and class" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented athlete table and class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
