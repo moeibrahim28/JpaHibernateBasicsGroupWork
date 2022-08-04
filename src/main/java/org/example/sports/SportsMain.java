@@ -2,6 +2,9 @@ package org.example.sports;
 
 import org.example.shared.io.UserOutputService;
 import org.example.shared.io.console.ConsoleUserOutputServiceImpl;
+import org.example.shared.io.db.Repository;
+import org.example.sports.db.AthleteRepository;
+import org.example.sports.db.StatisticRepository;
 import org.example.sports.model.Athlete;
 import org.example.sports.model.Statistic;
 import org.example.sports.service.ScannerUserStatisticService;
@@ -17,6 +20,8 @@ public class SportsMain {
     public static void main(String[] args) throws Exception {
         UserOutputService userOutputService = new ConsoleUserOutputServiceImpl();
         StatisticsService statisticsService = new ScannerUserStatisticService();
+        StatisticRepository statisticRepository = new StatisticRepository();
+        AthleteRepository athleteRepository = new AthleteRepository();
         try {
             userOutputService.print("WELCOME");
 
@@ -32,26 +37,17 @@ public class SportsMain {
                 switch (userChoice) {
                     case 1:
                         //add a new athlete and get a statistic for them
-                        Athlete athlete= new Athlete();
                         Statistic statistic = statisticsService.addAthleteWithStatistic();
-                        athlete.setName(statistic.getName());
-                        statistic.setPlayerid(athlete.getId());
-                        transaction.begin();
-                        entityManager.persist(athlete);
-                        transaction.commit();
-                        transaction.begin();
-                        entityManager.persist(statistic);
-                        transaction.commit();
+                        athleteRepository.save(statistic.getAthlete());
+                        statisticRepository.save(statistic);
                         userChoice = statisticsService.getUserChoice();
                         break;
                     case 2:
                         //add a statistic to a pre-existing athlete
                         Statistic statistic1 = statisticsService.getDistinctPlayerForNewStatistic();
                         Statistic anotherStatistic = statisticsService.addStatisticToPlayer(statistic1);
-                        anotherStatistic.setPlayerid(statistic1.getPlayerid());
-                        transaction.begin();
-                        entityManager.persist(anotherStatistic);
-                        transaction.commit();
+                        anotherStatistic.setAthlete(statistic1.getAthlete());
+                        statisticRepository.save(anotherStatistic);
                         userChoice = statisticsService.getUserChoice();
                         break;
                     case 3:
@@ -61,9 +57,7 @@ public class SportsMain {
                             case 1:
                                 //gets an athlete and prints their average points
                                 Statistic statisticToGetAVG = statisticsService.getDistinctPlayerForNewStatistic();
-                                String query = "SELECT S from Statistic S where S.playerid = '" + statisticToGetAVG.getPlayerid() + "'";
-                                List<Statistic> statisticsToAverage = entityManager.createQuery(query,
-                                        Statistic.class).getResultList();
+                                List<Statistic> statisticsToAverage = statisticRepository.getListOfStatistics(statisticToGetAVG);
 
                                 float average = 0;
                                 double count = 0;
@@ -78,9 +72,7 @@ public class SportsMain {
                             case 2:
                                 //gets an athlete and prints their max points
                                 Statistic statisticToGetMax = statisticsService.getDistinctPlayerForNewStatistic();
-                                String queryMax = "SELECT S from Statistic S where S.playerid = '" + statisticToGetMax.getPlayerid() + "'";
-                                List<Statistic> statisticsToMax = entityManager.createQuery(queryMax,
-                                        Statistic.class).getResultList();
+                                List<Statistic> statisticsToMax = statisticRepository.getListOfStatistics(statisticToGetMax);
                                 int max = 0;
                                 for (Statistic stat : statisticsToMax) {
                                     if (max < stat.getScoreInGame()) {

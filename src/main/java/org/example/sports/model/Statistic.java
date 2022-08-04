@@ -3,9 +3,7 @@ package org.example.sports.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -15,19 +13,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Table(name="SPORTS_STATISTICS")
 public class Statistic {
     @Id
-    private int id= counter.getAndIncrement();
-    private String name;
-    private int playerid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private int scoreInGame;
     private String sport="Bowling";
-    private static final AtomicInteger counter=new AtomicInteger(0);
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Statistic statistic = (Statistic) o;
-        return name.equals(statistic.name);
-    }
+    @ManyToOne
+    private Athlete athlete;
 
 }

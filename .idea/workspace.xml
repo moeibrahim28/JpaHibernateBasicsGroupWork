@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a08601dd-2305-4399-a27d-96bb8e6d2003" name="Changes" comment="implemented athlete table and class" />
+    <list default="true" id="a08601dd-2305-4399-a27d-96bb8e6d2003" name="Changes" comment="used id to get players statistics for average and max implementations">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/db/AthleteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/db/StatisticRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/db/StatisticRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/model/Athlete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/model/Athlete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/model/Statistic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/model/Statistic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/sports/service/ScannerUserStatisticService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/sports/service/ScannerUserStatisticService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +44,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/Users/moe/Documents/Flatiron/Week7/Day21/JpaHibernateBasicsGroupWork"
+    "last_opened_file_path": "/Users/moe/Documents/Flatiron/Week7/Day21/JpaHibernateBasicsGroupWork",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -145,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659557606841</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="used id to get players statistics for average and max implementations">
+      <created>1659557708099</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659557708099</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,17 +182,7 @@
     <MESSAGE value="comments added in main" />
     <MESSAGE value="still need to implement repository interface; static methods moved to scanneruserinputservice class" />
     <MESSAGE value="implemented athlete table and class" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented athlete table and class" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/sports/SportsMain.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="used id to get players statistics for average and max implementations" />
+    <option name="LAST_COMMIT_MESSAGE" value="used id to get players statistics for average and max implementations" />
   </component>
 </project>

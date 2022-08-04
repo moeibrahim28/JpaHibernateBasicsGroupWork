@@ -3,9 +3,9 @@ package org.example.sports.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
@@ -14,7 +14,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Table(name="ATHLETE_LIST")
 public class Athlete {
     @Id
-    private int id=counter.getAndIncrement();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    private int id;
     private String name;
-    private static final AtomicInteger counter=new AtomicInteger(0);
+
+    @OneToMany(mappedBy = "athlete")
+    private List<Statistic> statisticList = new ArrayList<>();
 }

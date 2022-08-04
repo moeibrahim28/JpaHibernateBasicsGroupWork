@@ -5,6 +5,7 @@ import org.example.shared.io.UserOutputService;
 import org.example.shared.io.console.ConsoleUserInputServiceImpl;
 import org.example.shared.io.console.ConsoleUserOutputServiceImpl;
 import org.example.shared.io.validation.NonBlankInputValidationRule;
+import org.example.sports.model.Athlete;
 import org.example.sports.model.Statistic;
 
 import javax.persistence.EntityManager;
@@ -23,11 +24,13 @@ public class ScannerUserStatisticService implements StatisticsService{
     //add an athlete with a statistic
     public  Statistic addAthleteWithStatistic() {
         Statistic statistic = new Statistic();
+        Athlete athlete = new Athlete();
         String response = userInputService.getUserInput("What's the athletes name?",
                 new NonBlankInputValidationRule());
         int score = Integer.parseInt(userInputService.getUserInput("What's the athletes score in this game?",
                 new NonBlankInputValidationRule()));
-        statistic.setName(response);
+        athlete.setName(response);
+        statistic.setAthlete(athlete);
         statistic.setScoreInGame(score);
         return statistic;
     }
@@ -60,10 +63,12 @@ public class ScannerUserStatisticService implements StatisticsService{
         List<Statistic> statisticNamesList = entityManager.createQuery(hql,
                 Statistic.class).getResultList();
         List<String> playerNames = new ArrayList<>();
+        if(statisticNamesList.size()!=0){
         for (int i = 0; i < statisticNamesList.size(); i++) {
-            if (!playerNames.contains(statisticNamesList.get(i).getName())) {
-                playerNames.add(statisticNamesList.get(i).getName());
+            if (!playerNames.contains(statisticNamesList.get(i).getAthlete().getName())) {
+                playerNames.add(statisticNamesList.get(i).getAthlete().getName());
             }
+        }
         }
         String playerNamesString = "";
         int count = 0;
@@ -75,7 +80,7 @@ public class ScannerUserStatisticService implements StatisticsService{
         int chosenPlayer = Integer.parseInt(userInputService.getUserInput("Which athlete do you want to choose?" + playerNamesString,
                 new NonBlankInputValidationRule()));
         Statistic statistic = new Statistic();
-        statistic.setName(statisticNamesList.get(chosenPlayer).getName());
+        statistic.setAthlete((statisticNamesList.get(chosenPlayer).getAthlete()));
 
 
         return statistic;
